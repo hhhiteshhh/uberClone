@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   Platform,
   StatusBar,
+  TouchableOpacity,
 } from "react-native";
 import tailwind from "tailwind-react-native-classnames";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
@@ -13,6 +14,8 @@ import { GOOGLE_MAPS_APIKEY } from "@env";
 import { useDispatch } from "react-redux";
 import { setDestination, setOrigin } from "../redux/silces/navSlice";
 import { useNavigation } from "@react-navigation/native";
+import NavFavourites from "./NavFavourites";
+import { Icon } from "react-native-elements";
 const NavigatorCard = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -54,6 +57,27 @@ const NavigatorCard = () => {
             }}
           />
         </View>
+        <NavFavourites />
+      </View>
+      <View style={tailwind`flex-row bg-white justify-evenly py-2 mt-auto border-t border-gray-100`}>
+        <TouchableOpacity
+          onPress={()=>{navigation.navigate("RideOptionsCard")}}
+          style={tailwind`flex flex-row  justify-between bg-black w-24 py-3 px-4 rounded-full`}
+        >
+          <Icon name="car" type="font-awesome" color="white" size={16} />
+          <Text style={tailwind`text-white text-center`}>Rides</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={tailwind`flex flex-row justify-between w-24 py-3 px-4 rounded-full`}
+        >
+          <Icon
+            name="fast-food-outline"
+            type="ionicon"
+            color="black"
+            size={16}
+          />
+          <Text style={tailwind`text-black text-center`}>Eats</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
